@@ -1,9 +1,17 @@
 import java.util.Scanner;
 import java.util.Random;
 
+import java.io.PrintWriter;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
+
 public class Main{
 
-  public static void main(String[] args){
+  public static void main(String[] args) throws FileNotFoundException{
+
+    FileOutputStream fos = new FileOutputStream("Cod_Tournament.csv",true);
+    PrintWriter pw = new PrintWriter(fos);
+
     Random random = new Random();
     Scanner input = new Scanner(System.in);
 
@@ -21,13 +29,13 @@ public class Main{
     int rounds_won2;
 
 
+
     int breakableCheck = 0;
 
-
-
+  //  CreateSpreadsheet excel = new CreateSpreadsheet(tournamentChoice);
 
     if (tournamentChoice == 1){
-
+      pw.println("Tier,Player1,Player2,Map,MapWinner");
       TieredTournament tournament = new TieredTournament();
       MapSelector map = new MapSelector(tournament.getTiers());
 
@@ -57,17 +65,18 @@ public class Main{
           winner = input.nextInt();
           tournament.setPlayerRoundStatus( p1, p2);
           if (winner == 1){
-
+            loser = 0;
             tournament.setPlayerStatus( p1, p2);
 
           }
           else{
-
+            loser = 1;
             tournament.setPlayerStatus( p2, p1);
 
           }
 
-          // get the map for the tier
+          pw.println((i+1)+","+map.getCurrentMap(i)+","+tournament.getName(p1)+","+tournament.getName(p2)+","+tournament.getName(winner)+","+tournament.getName(loser));
+
         }
       }
       int counter = 0;
@@ -82,6 +91,7 @@ public class Main{
     }
     // RUN THE ROUND, GET THE INFO, THEN SWAP PLAYER POSITIONS AFTER!
     if (tournamentChoice == 2){
+      pw.println("MAP,Player1,Player2,P1_RoundWins,P2_RoundWins");
       RRobin_Tournament tournament = new RRobin_Tournament();
 
       MapSelector map = new MapSelector(tournament.RR_getTiers());
@@ -117,15 +127,19 @@ public class Main{
             }
             roundCounter++;
             tournament.matchWin(tournament.getCurrentPlayer(winner));
-
+            pw.println(map.getCurrentMap(i)+","+tournament.getName(p1)+","+tournament.getName(p2)+","+rounds_won1+","+rounds_won2);
 
           }
 
 
         }
       }
+
+
       tournament.getWinners();
     }
+    pw.close();
+    System.out.println("Cod_Tournament.csv has been created and placed into project folder");
 
   }
 }
