@@ -61,8 +61,8 @@ public class Main{
           }
           System.out.println("\nTier "+(i+1)+". Round "+(j+1));
           System.out.println(tournament.getName(p1)+" vs "+tournament.getName(p2));
-          System.out.println("Map: \n\n"+map.getCurrentMap(i));
-          System.out.println("Who won current map?\n[1] for "+tournament.getName(p1)+". [2] for "+tournament.getName(p2)+":");
+          System.out.println("Map: "+map.getCurrentMap(i));
+          System.out.println("\nWho won current map?\n[1] for "+tournament.getName(p1)+". [2] for "+tournament.getName(p2)+":");
           winner = input.nextInt();
           tournament.setPlayerRoundStatus( p1, p2);
           if (winner == 1){
