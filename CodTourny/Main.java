@@ -9,7 +9,7 @@ public class Main{
 
   public static void main(String[] args) throws FileNotFoundException{
 
-    FileOutputStream fos = new FileOutputStream("Cod_Tournament.csv",true); // change to false if you want to wipe previous games on new doc creation
+    FileOutputStream fos = new FileOutputStream("Cod_Tournament.csv",true); // change to false if you want to wipe previous games on new doc creation true if u want layers of previous games
     PrintWriter pw = new PrintWriter(fos);
     fos = null;
 
@@ -36,7 +36,7 @@ public class Main{
   //  CreateSpreadsheet excel = new CreateSpreadsheet(tournamentChoice);
 
     if (tournamentChoice == 1){
-      pw.println("Tier,Player1,Player2,Map,MapWinner,MapLoser");
+      pw.println("Tier,Map,Player1,Player2,MapWinner,MapLoser");
       TieredTournament tournament = new TieredTournament();
       MapSelector map = new MapSelector(tournament.getTiers());
 
