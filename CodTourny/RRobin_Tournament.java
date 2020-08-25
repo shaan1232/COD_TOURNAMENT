@@ -76,6 +76,9 @@ public class RRobin_Tournament extends Tournament{
   // to find our next opponents, we are going to have to take into account
   // if this is left most, middle, or right most. we will have to update our
 
+  public int getPoints(int i){
+    return points[i];
+  }
 
   public void matchWin(String checkName){
     for (int i = 0; i < getPlayerCount(); i++){
