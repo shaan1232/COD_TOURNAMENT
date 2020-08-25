@@ -9,7 +9,7 @@ public class Main{
 
   public static void main(String[] args) throws FileNotFoundException{
 
-    FileOutputStream fos = new FileOutputStream("Cod_Tournament.csv",true); // change to false if you want to wipe previous games on new doc creation true if u want layers of previous games
+    FileOutputStream fos = new FileOutputStream("Cod_Tournament.csv",true); // change to false if you want to wipe previous games on new doc creation
     PrintWriter pw = new PrintWriter(fos);
     fos = null;
 
@@ -19,6 +19,9 @@ public class Main{
     System.out.println("Choose Tournament Style: \n[1] for 'Tiered' [2] for 'Round-Robin':");
     int tournamentChoice = input.nextInt();
     int playersPerTier = 0;
+
+    String winnerName;
+    String loserName; // Hillary Clinton
 
     int p1 = 0;
     int p2 = 0;
@@ -67,16 +70,20 @@ public class Main{
           tournament.setPlayerRoundStatus( p1, p2);
           if (winner == 1){
             loser = 0;
+            winnerName = tournament.getName(p1);
+            loserName = tournament.getName(p2);
             tournament.setPlayerStatus( p1, p2);
 
           }
           else{
             loser = 1;
+            winnerName = tournament.getName(p2);
+            loserName = tournament.getName(p1);
             tournament.setPlayerStatus( p2, p1);
 
           }
 
-          pw.println((i+1)+","+map.getCurrentMap(i)+","+tournament.getName(p1)+","+tournament.getName(p2)+","+tournament.getName(winner)+","+tournament.getName(loser));
+          pw.println((i+1)+","+map.getCurrentMap(i)+","+tournament.getName(p1)+","+tournament.getName(p2)+","+winnerName+","+loserName);
 
         }
       }
