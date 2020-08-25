@@ -119,13 +119,11 @@ public class RRobin_Tournament extends Tournament{
   }
 
   public void changeTier(){
-
     ArrayList<String> listTopCopy = new ArrayList(listTop);
     ArrayList<String> listBotCopy = new ArrayList(listBot);
     String copy1;
     String copy2;
     for (int i = 0; i < playerCount_Odd/2; i++){
-  
       // LEFT
       if (i == 0){
         copy2 = listBotCopy.get(i+1);
@@ -160,7 +158,5 @@ public class RRobin_Tournament extends Tournament{
         listBot.set(i,copy2);
       }
     }
-
   }
-
 }
