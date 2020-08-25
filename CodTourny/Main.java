@@ -9,7 +9,9 @@ public class Main{
 
   public static void main(String[] args) throws FileNotFoundException{
 
-    FileOutputStream fos = new FileOutputStream("Cod_Tournament.csv",true); // change to false if you want to wipe previous games on new doc creation
+    String fileName = "Cod_Tournament.csv"; //IF you rename the file change the output stream aswell!
+
+    FileOutputStream fos = new FileOutputStream("Cod_Tournament.csv",false); // change to false if you want to wipe previous games on new doc creation
     PrintWriter pw = new PrintWriter(fos);
     fos = null;
 
@@ -22,18 +24,13 @@ public class Main{
 
     String winnerName;
     String loserName; // Hillary Clinton
-
     int p1 = 0;
     int p2 = 0;
     int roundCounter = 0;
-
     int winner;
     int loser;
     int rounds_won1;
     int rounds_won2;
-
-
-
     int breakableCheck = 0;
 
   //  CreateSpreadsheet excel = new CreateSpreadsheet(tournamentChoice);
@@ -73,18 +70,14 @@ public class Main{
             winnerName = tournament.getName(p1);
             loserName = tournament.getName(p2);
             tournament.setPlayerStatus( p1, p2);
-
           }
           else{
             loser = 1;
             winnerName = tournament.getName(p2);
             loserName = tournament.getName(p1);
             tournament.setPlayerStatus( p2, p1);
-
           }
-
           pw.println((i+1)+","+map.getCurrentMap(i)+","+tournament.getName(p1)+","+tournament.getName(p2)+","+winnerName+","+loserName);
-
         }
       }
       int counter = 0;
@@ -92,34 +85,25 @@ public class Main{
         counter++;
       }
       System.out.println("Winner is "+tournament.getName(counter));
-
-
-
-
     }
     // RUN THE ROUND, GET THE INFO, THEN SWAP PLAYER POSITIONS AFTER!
     if (tournamentChoice == 2){
       pw.println("MAP,Player1,Player2,P1_RoundWins,P2_RoundWins");
       RRobin_Tournament tournament = new RRobin_Tournament();
-
       MapSelector map = new MapSelector(tournament.RR_getTiers());
-
+      
       for (int i = 0; i < tournament.RR_getTiers(); i++){
         if (i > 0){
           tournament.changeTier();
         }
-
         for (int j = 0; (j < tournament.getOddPlayerCount()/2); j++){
-
           // REMEMBER POSITION FOR p1 is J = i and P2 is J = i + getPlayerCount()/2
-
           p1 = j;
           p2 = j + (tournament.getPlayerCount())/2;
           if (!((tournament.getCurrentPlayer(p1).equals("Empty")) || (tournament.getCurrentPlayer(p2).equals("Empty")))){
             System.out.print("Round ["+roundCounter+"] |  ");
             System.out.println(tournament.getCurrentPlayer(p1)+" vs "+tournament.getCurrentPlayer(p2));
             System.out.println("Map: "+map.getCurrentMap(i));
-
             System.out.println("How many rounds did "+tournament.getCurrentPlayer(p1)+" win?: ");
             rounds_won1 = input.nextInt();
             tournament.roundsWin(tournament.getCurrentPlayer(p1),rounds_won1);
@@ -136,10 +120,7 @@ public class Main{
             roundCounter++;
             tournament.matchWin(tournament.getCurrentPlayer(winner));
             pw.println(map.getCurrentMap(i)+","+tournament.getName(p1)+","+tournament.getName(p2)+","+rounds_won1+","+rounds_won2);
-
           }
-
-
         }
       }
       pw.println("FINAL SCORE");
@@ -150,7 +131,7 @@ public class Main{
       tournament.getWinners();
     }
     pw.close();
-    System.out.println("Cod_Tournament.csv has been created and placed into project folder");
+    System.out.println(fileName+" has been created and placed into project folder");
 
   }
 }
