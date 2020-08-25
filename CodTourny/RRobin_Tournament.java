@@ -13,14 +13,16 @@ public class RRobin_Tournament extends Tournament{
   private int playerCount_Odd;
 
   private int[] points;
+  int roundWinPoints;
+  int mapWinPoints;
 
   public RRobin_Tournament(){
+    super(2);
 
     // EDITABLE VARIABLES
-    int roundWinPoints = 2;
-    int mapWinPoints = 7;
+    roundWinPoints = 2;
+    mapWinPoints = 7;
 
-    super(2);
     listTop = new ArrayList<String>();
     listBot = new ArrayList<String>();
 
@@ -30,7 +32,6 @@ public class RRobin_Tournament extends Tournament{
     for (int i = 0; i < getPlayerCount(); i++){
       points[i] = 0;
     }
-
   }
 
   private void setOffRound(){
@@ -48,11 +49,8 @@ public class RRobin_Tournament extends Tournament{
         else{
           break;
         }
-
       }
-
     //  listTop = new String[(getPlayerCount()+1)/2];
-
     }
     else{
       playerCount_Odd = getPlayerCount();
