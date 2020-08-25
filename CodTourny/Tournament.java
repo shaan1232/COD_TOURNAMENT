@@ -36,7 +36,7 @@ public class Tournament{
     // input prompt: # of players
 
     Scanner input = new Scanner(System.in);
-    System.out.println("Enter Number of players (must be multiple of 2 or 2^n for tiered tourny):");
+    System.out.println("Enter Number of players (must be of 2^n for tiered tourny):");
     playerCount = input.nextInt();
 
     playerStatus = new ArrayList<Boolean>();
