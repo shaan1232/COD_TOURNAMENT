@@ -9,8 +9,9 @@ public class Main{
 
   public static void main(String[] args) throws FileNotFoundException{
 
-    FileOutputStream fos = new FileOutputStream("Cod_Tournament.csv",true);
+    FileOutputStream fos = new FileOutputStream("Cod_Tournament.csv",true); // change to false if you want to wipe previous games on new doc creation
     PrintWriter pw = new PrintWriter(fos);
+    fos = null;
 
     Random random = new Random();
     Scanner input = new Scanner(System.in);
@@ -35,7 +36,7 @@ public class Main{
   //  CreateSpreadsheet excel = new CreateSpreadsheet(tournamentChoice);
 
     if (tournamentChoice == 1){
-      pw.println("Tier,Player1,Player2,Map,MapWinner");
+      pw.println("Tier,Player1,Player2,Map,MapWinner,MapLoser");
       TieredTournament tournament = new TieredTournament();
       MapSelector map = new MapSelector(tournament.getTiers());
 
@@ -134,8 +135,11 @@ public class Main{
 
         }
       }
-
-
+      pw.println("FINAL SCORE");
+      pw.println("NAME,TOTAL POINTS");
+      for (int i = 0; i < tournament.getPlayerCount();i++){
+        pw.println(tournament.getName(i)+","+tournament.getPoints(i));
+      }
       tournament.getWinners();
     }
     pw.close();
