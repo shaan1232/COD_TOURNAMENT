@@ -3,10 +3,8 @@ import java.util.Random;
 
 public class TieredTournament extends Tournament{
 
-  //private int bestOf;
   private int nTiers;
-
-
+  
   public TieredTournament(){
     super(1);
 
@@ -22,15 +20,13 @@ public class TieredTournament extends Tournament{
       }
     }
     setNumTiers(nTiers);
-
   }
 
   public void setNumTiers(int i){
     nTiers = i;
   }
+  
   public int getTiers(){
     return nTiers;
   }
-
-
 }
