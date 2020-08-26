@@ -101,7 +101,7 @@ public class Main{
           p1 = j;
           p2 = j + (tournament.getPlayerCount())/2;
           if (!((tournament.getCurrentPlayer(p1).equals("Empty")) || (tournament.getCurrentPlayer(p2).equals("Empty")))){
-            System.out.print("Round ["+roundCounter+"] |  ");
+            System.out.print("Round ["+(roundCounter+1)+"] |  ");
             System.out.println(tournament.getCurrentPlayer(p1)+" vs "+tournament.getCurrentPlayer(p2));
             System.out.println("Map: "+map.getCurrentMap(i));
             System.out.println("How many rounds did "+tournament.getCurrentPlayer(p1)+" win?: ");
