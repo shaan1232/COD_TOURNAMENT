@@ -3,6 +3,9 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.*;
 
+
+
+
 public class RRobin_Tournament extends Tournament{
   private ArrayList<String> listTop;
   private ArrayList<String> listBot;
@@ -15,13 +18,15 @@ public class RRobin_Tournament extends Tournament{
 
   public RRobin_Tournament(){
     super(2);
-    
+
     // EDITABLE VARIABLES
     roundWinPoints = 2;
     mapWinPoints = 7;
 
     listTop = new ArrayList<String>();
     listBot = new ArrayList<String>();
+
+
     setOffRound();
     points = new int[getPlayerCount()];
     for (int i = 0; i < getPlayerCount(); i++){
@@ -45,6 +50,7 @@ public class RRobin_Tournament extends Tournament{
           break;
         }
       }
+    //  listTop = new String[(getPlayerCount()+1)/2];
     }
     else{
       playerCount_Odd = getPlayerCount();
@@ -66,14 +72,17 @@ public class RRobin_Tournament extends Tournament{
       return getPlayerCount()-1;
     }
   }
-  
+
+  // to find our next opponents, we are going to have to take into account
+  // if this is left most, middle, or right most. we will have to update our
+
   public int getPoints(int i){
     return points[i];
   }
 
   public void matchWin(String checkName){
     for (int i = 0; i < getPlayerCount(); i++){
-      if (checkName.equals(getName(i))){
+      if (names[i].equals(checkName)){
         points[i] += mapWinPoints;
         break;
       }
@@ -82,8 +91,10 @@ public class RRobin_Tournament extends Tournament{
 
   public void roundsWin(String checkName, int roundsWon){
     for (int i = 0; i < getPlayerCount(); i++){
-      if (checkName.equals(getName(i))){
+      System.out.print("Going in, "+names[i]+" has "+points[i]+" points. ");
+      if (names[i].equals(checkName)){
         points[i] += (roundWinPoints*roundsWon);
+        System.out.println("Giving "+names[i]+" "+(roundWinPoints*roundsWon)+" for a total of "+points[i]);
         break;
       }
     }
@@ -105,6 +116,7 @@ public class RRobin_Tournament extends Tournament{
     System.out.println("The winner is: "+getName(highestPointsI)+"!");
   }
 
+
   public String getCurrentPlayer(int i){
     if (i < playerCount_Odd/2){
       return listTop.get(i);
@@ -119,12 +131,14 @@ public class RRobin_Tournament extends Tournament{
   }
 
   public void changeTier(){
+
     ArrayList<String> listTopCopy = new ArrayList(listTop);
     ArrayList<String> listBotCopy = new ArrayList(listBot);
     String copy1;
     String copy2;
     for (int i = 0; i < playerCount_Odd/2; i++){
       // LEFT
+
       if (i == 0){
         copy2 = listBotCopy.get(i+1);
         listBot.set(i,copy2);
@@ -136,6 +150,7 @@ public class RRobin_Tournament extends Tournament{
         listTop.set(i,copy1);
         listBot.set(i,copy2);
       }
+
       // MIDDLE
       if ( i > 1 && (i < (playerCount_Odd/2)-1) && playerCount_Odd > 4){
         copy1 = listTopCopy.get(i-1);
@@ -150,13 +165,17 @@ public class RRobin_Tournament extends Tournament{
         listTop.set(i,copy1);
         listBot.set(i,copy2);
       }
-      // RIGHT CUBE SHAPE < 4 PLAYERS
       if (i == 1 && playerCount_Odd <= 4){
         copy1 = listBotCopy.get(0);
         copy2 = listTopCopy.get(1);
         listTop.set(i,copy1);
         listBot.set(i,copy2);
       }
+
+
+
     }
+
   }
+
 }
